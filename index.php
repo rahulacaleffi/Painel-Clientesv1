@@ -408,8 +408,7 @@ margin-left: 30px;
       <div class="col_md_login">
 <div class="cont_ba_opcitiy">
         
-        <h2>Já sou cliente!</h2>  
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> 
+        <h2>Já sou cliente!</h2>   
   <button class="btn_login" onclick="cambiar_login()">LOGIN</button>
   </div>
   </div>
@@ -417,10 +416,7 @@ margin-left: 30px;
 <div class="cont_ba_opcitiy">
   <h2>Quero ser cliente!</h2>
 
-  
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-  <button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN UP</button>
+  <button class="btn_sign_up" onclick="cambiar_sign_up()">CADASTRO</button>
 </div>
   </div>
        </div>
@@ -439,19 +435,19 @@ margin-left: 30px;
  <div class="cont_form_login">
 <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
    <h2>LOGIN</h2>
- <input type="text" placeholder="Email" />
-<input type="password" placeholder="Password" />
-<button class="btn_login" onclick="cambiar_login()">LOGIN</button>
+ <input type="email" placeholder="Email" />
+<input type="password" placeholder="Senha" />
+<button class="btn_login" onclick="cambiar_login()">ENTRAR</button>
   </div>
   
    <div class="cont_form_sign_up">
 <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-     <h2>SIGN UP</h2>
+     <h2>CADASTRAR-SE</h2>
+<input type="text" placeholder="Nome/Razão Social" />
 <input type="text" placeholder="Email" />
-<input type="text" placeholder="User" />
-<input type="password" placeholder="Password" />
-<input type="password" placeholder="Confirm Password" />
-<button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN UP</button>
+<input type="password" placeholder="Senha" />
+<input type="password" placeholder="Confirmar senha" />
+<button class="btn_sign_up" onclick="cambiar_sign_up()">REGISTRAR-SE</button>
 
   </div>
 
