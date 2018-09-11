@@ -254,7 +254,7 @@ background text
  */
 .cont_ba_opcitiy {
   position: relative;
-  background-color: rgba(120, 144, 156, 0.55);
+  background-color: rgba(120, 144, 156, 0.85);
   width: 80%;
   border-radius:3px ;
 margin-top: 60px;
