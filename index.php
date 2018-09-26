@@ -416,7 +416,7 @@ margin-left: 30px;
 <div class="cont_ba_opcitiy">
   <h2>Quero ser cliente!</h2>
 
-  <button class="btn_sign_up" onclick="cambiar_sign_up()">CADASTRO</button>
+  <button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN UP</button>
 </div>
   </div>
        </div>
@@ -442,7 +442,7 @@ margin-left: 30px;
   
    <div class="cont_form_sign_up">
 <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-     <h2>CADASTRAR-SE</h2>
+     <h2>SIGN UP</h2>
 <input type="text" placeholder="Nome/Razão Social" />
 <input type="text" placeholder="Email" />
 <input type="password" placeholder="Senha" />
