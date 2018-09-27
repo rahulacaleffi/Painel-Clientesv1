@@ -1,3 +1,6 @@
+<?php
+  require_once "connect.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -432,30 +435,98 @@ margin-left: 30px;
     <div class="cont_img_back_">
        <img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />
        </div>
+       <form method="post" action="#entrar">
  <div class="cont_form_login">
 <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
    <h2>LOGIN</h2>
- <input type="email" placeholder="Email" />
-<input type="password" placeholder="Senha" />
-<button class="btn_login" onclick="cambiar_login()">ENTRAR</button>
+   
+ <input type="email" name="email" placeholder="Email" required="required" />
+<input type="password" name="senha" placeholder="Senha" required="required" />
+<button class="btn_login" type="submit" name="entrar" onclick="cambiar_login()">ENTRAR</button>
+
   </div>
-  
+  </form>
+  <form action="#registrar" method="post">
    <div class="cont_form_sign_up">
 <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+
      <h2>SIGN UP</h2>
-<input type="text" placeholder="Nome/Razão Social" />
-<input type="text" placeholder="Email" />
-<input type="password" placeholder="Senha" />
-<input type="password" placeholder="Confirmar senha" />
-<button class="btn_sign_up" onclick="cambiar_sign_up()">REGISTRAR-SE</button>
+<input type="text" name="nome" placeholder="Nome" required="required" />
+<input type="text" name="razao" placeholder="Razão Social" />
+<input type="text" name="email" placeholder="Email" required="required" />
+<input type="password" name="senha1" placeholder="Senha" required="required" />
+<button class="btn_sign_up" type="submit" name="registrar" onclick="cambiar_sign_up()">REGISTRAR-SE</button>
 
   </div>
-
+</form>
     </div>
     
   </div>
  </div>
 </div>
+
+<section id="entrar">
+  <?php
+    if (isset($_POST['entrar'])) {
+      $email=$_POST['email'];
+      $senha=$_POST['senha'];
+      $ver_login=$conn->prepare('SELECT * FROM clientes WHERE email=:pusu AND senha=:psenha;');
+  $ver_login->bindValue(':pusu',$email);
+  $ver_login->bindValue(':psenha',sha1($senha));
+  $ver_login->execute();
+  if($ver_login->rowCount()==0){
+    echo "<div align=\"center\" style=\"color:#fff;\"><br>Login ou Senha inválido.</div>";
+  }else{ 
+     $row=$ver_login->fetch();
+    ob_start();
+    session_start();
+    $_SESSION['login']=$row['id'];
+    echo "<meta http-equiv=\"refresh\" content=0;url=\"painel.php\">";
+  }
+    }
+  ?>
+</section>
+
+<section id="registrar">
+  <?php
+    if (isset($_POST['registrar'])) {
+     $email=$_POST['email'];
+     $razao=$_POST['razao'];
+     $nome=$_POST['nome'];
+      $senha1=$_POST['senha1'];
+      if (isset($email) && isset($nome) && isset($senha1)) {
+        $inserir_login=$conn->prepare('INSERT INTO clientes (id, nome, email, razao, senha) VALUES (NULL, :pnome, :pemail, :prazao, :psenha)');
+        $inserir_login->bindValue(':pemail',$email);
+        $inserir_login->bindValue(':pnome',$nome);
+        $inserir_login->bindValue(':prazao',$razao);
+        $inserir_login->bindValue(':psenha',sha1($senha1));
+        $inserir_login->execute();
+
+        $ver_login=$conn->prepare('SELECT * FROM clientes WHERE email=:pusu AND senha=:psenha;');
+        $ver_login->bindValue(':pusu',$email);
+        $ver_login->bindValue(':psenha',sha1($senha1));
+        $ver_login->execute();
+
+        $row=$ver_login->fetch();
+        ob_start();
+        session_start();
+        
+        $_SESSION['login']=$row['id'];
+
+
+        echo "<meta http-equiv=\"refresh\" content=0;url=\"painel.php\">";
+         
+      }else{
+         echo"<script type='text/javascript'>";
+
+        echo "alert('Dados inválidos');";
+
+      echo "</script>";
+      }
+      
+    }
+  ?>
+</section>
 
 <script type="text/javascript">
 	/* ------------------------------------ Click on login and Sign Up to  changue and view the effect
