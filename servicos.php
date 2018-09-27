@@ -226,80 +226,7 @@ ddaccordion.init({
             ?>
     </tbody>
     <tfoot>
-        <tr>
-            <td colspan="6" class="rounded-foot-left"><em>
-            <?php
-                if (isset($_GET['apagarcham'])&& isset($_SESSION['login'])) {
-                    $id=$_GET['apagarcham'];
-                    $excluirchamado=$conn->prepare('DELETE FROM chamados WHERE id = :pid');
-                    $excluirchamado->bindValue(':pid', $id);
-                    $excluirchamado->execute();
-                    echo "<meta http-equiv=\"refresh\" content=0;url=\"painel.php?sucessoexcluir\">";
-                }
-
-
-
-                if (isset($_GET['chamado'])&& isset($_SESSION['login'])) {
-                    $id=$_GET['chamado'];
-                    $ver_chamados=$conn->prepare('SELECT * FROM chamados WHERE id=:pid');
-                    $ver_chamados->bindValue('pid',$id);
-                    $ver_chamados->execute();
-                    $rowCham=$ver_chamados->fetch();
-
-                
-            ?>    
-            <div class="form" style="max-width: 450px;">
-         <form action="painel.php" method="post" class="niceform">
-         
-                <fieldset style="max-width: 450px;">
-                    <dl>
-                        <dt><label for="descricao">Descriçao:</label></dt>
-                        <dd><textarea name="descricao" style="width: 300px; height: 75px;"><?php echo $rowCham['descricao']; ?></textarea></dd>
-                    </dl>
-                    <dl>
-                        <dt><label for="nome">Nome:</label></dt>
-                        <dd><input type="text" name="nome" id="nome" size="34" value="<?php echo $rowCham['nome']; ?>" /></dd>
-                    </dl>
-                    <input type="hidden" name="id" value="<?php echo $rowCham['id']; ?>">
-                    <dl>
-                        <dt><label for="telefone">Telefone:</label></dt>
-                        <dd><input type="text" name="telefone" id="telefone" size="34" value="<?php echo $rowCham['telefone']; ?>" /></dd>
-                    </dl>
-
-                     <dl class="submit">
-                    <input type="submit" name="alterarchamado" value="Alterar" />
-                     </dl>
-                     
-                     
-                    
-                </fieldset>
-                
-         </form>
-         </div>
-         <section id="alterarchamado">
-         <?php
-            }
-            if (isset($_POST['alterarchamado']) && isset($_SESSION['login'])) {
-                $descricao=$_POST['descricao'];
-                $nome=$_POST['nome'];
-                $telefone=$_POST['telefone'];
-                $id=$_POST['id'];
-                $grava3=$conn->prepare('UPDATE chamados SET nome = :pnome, descricao = :pdescricao, telefone = :ptelefone WHERE id = :pid');
-                $grava3->bindValue(':pid',$id);
-                $grava3->bindValue(':pdescricao',$descricao);
-                $grava3->bindValue(':pnome',$nome);
-                $grava3->bindValue(':ptelefone',$telefone);
-                $grava3->execute();
-                echo "<meta http-equiv=\"refresh\" content=0;url=\"painel.php?sucessoalterar\">";
-                
-            }
-         ?>
-         </section>
-
-            </em></td>
-            <td class="rounded-foot-right">&nbsp;</td>
-
-        </tr>
+        
     </tfoot>
 </table>
               <br>      
@@ -321,13 +248,41 @@ ddaccordion.init({
                             echo "<a href=\"servicos.php?contratar=".$rowServicos['id']."\" class=\"bt_green\"><span class=\"bt_green_lft\"></span><strong>Contratar</strong><span class=\"bt_green_r\"></span></a>";
                             echo "<br>";
                             echo "<br>";
-                            echo "<br>";
+                            echo "<br><hr>";
+
                             
                         }
     ?>
 
     </div> <!--end of right content -->  
-            
+         <?php
+            if (isset($_GET['contratar'])&&isset($_SESSION['login'])) {
+                $id_cliente=$row['id'];
+                $id_servico=$_GET['contratar'];
+                $ver_chamados23=$conn->prepare('SELECT * FROM servicos WHERE id=:pid');
+                        $ver_chamados23->bindValue('pid',$id_servico);
+                        $ver_chamados23->execute();
+                        $rowChamado23=$ver_chamados23->fetch();
+
+                $grava23=$conn->prepare('INSERT INTO servico_cliente (id_cliente, id_servico, valor) VALUES (:pid_cliente, :pid_servico, :pvalor)');
+                $grava23->bindValue(':pid_cliente',$id_cliente);
+                $grava23->bindValue(':pid_servico',$id_servico);
+                if ($rowChamado23['valor']!=null) {
+                    $grava23->bindValue(':pvalor',$rowChamado23['valor']);
+                }else{
+                    $grava23->bindValue(':pvalor',$rowChamado23['valor_texto']);
+                }
+                
+                $grava23->execute();
+
+                echo "<meta http-equiv=\"refresh\" content=0;url=\"servicos.php\">";
+                echo"<script type='text/javascript'>";
+
+                echo "alert('Serviço adicionado com sucesso. Aguarde até o documento ser anexado');";
+
+            echo "</script>";
+            }
+         ?>   
                     
   </div>   <!--end of center content -->               
                     
