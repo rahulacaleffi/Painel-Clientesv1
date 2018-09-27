@@ -16,3 +16,5 @@
 [27-Sep-2018 00:37:26 America/Chicago] PHP Strict Standards:  Only variables should be passed by reference in /home/intra392/public_html/new/clientes/painel.php on line 453
 [27-Sep-2018 00:45:23 America/Chicago] PHP Parse error:  syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home/intra392/public_html/new/clientes/painel.php on line 490
 [27-Sep-2018 00:46:49 America/Chicago] PHP Strict Standards:  Only variables should be passed by reference in /home/intra392/public_html/new/clientes/painel.php on line 454
+[27-Sep-2018 02:08:04 America/Chicago] PHP Parse error:  syntax error, unexpected '{' in /home/intra392/public_html/new/clientes/conta.php on line 258
+[27-Sep-2018 02:09:54 America/Chicago] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/intra392/public_html/new/clientes/index.php:469) in /home/intra392/public_html/new/clientes/index.php on line 482

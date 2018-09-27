@@ -101,7 +101,7 @@ ddaccordion.init({
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
-                    <li><a href="">Contato</a></li>
+                    <li><a href="contato.php">Contato</a></li>
                     </ul>
                     </div> 
                     
@@ -147,9 +147,11 @@ ddaccordion.init({
                     ?>
                     </ul>
                 </div>
-                    
+                    <a href="https://www.intrazone.com.br/webmail"><img src="images/webmail.png" style="max-width: 100px;"></a> 
             </div>
             
+            <br>
+            <br>
             
             <div class="sidebar_box">
                 <div class="sidebar_box_top"></div>
@@ -183,7 +185,7 @@ ddaccordion.init({
     
     <div class="right_content">            
         
-    <h2>Página em construção</h2> 
+    <h2>Página de faturas será lançada dia 01/08/2018</h2> 
 
     </div> <!--end of right content -->  
         

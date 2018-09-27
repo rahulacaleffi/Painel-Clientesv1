@@ -101,7 +101,7 @@ ddaccordion.init({
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
-                    <li><a href="">Contato</a></li>
+                    <li><a href="contato.php">Contato</a></li>
                     </ul>
                     </div> 
                     
@@ -147,10 +147,11 @@ ddaccordion.init({
                     ?>
                     </ul>
                 </div>
-                    
+                    <a href="https://www.intrazone.com.br/webmail"><img src="images/webmail.png" style="max-width: 100px;"></a> 
             </div>
             
-            
+            <br>
+            <br>
             <div class="sidebar_box">
                 <div class="sidebar_box_top"></div>
                 <div class="sidebar_box_content">
@@ -183,7 +184,81 @@ ddaccordion.init({
     
     <div class="right_content">            
         
-    <h2>Serviços contratados</h2> 
+    <h2>Entre em contato - Utilize nossos canais de comunicação</h2> 
+
+    <h4>Telefone: 41 99265-1243</h4>
+    <h4>E-mail: 41 3324-8802</h4>
+    <h4>Rua Praça Osório, 175 - Apto 502</h4>
+
+    <h2>Ou preencha o formulário abaixo:</h2>
+    <div class="form">
+         <form action="contato.php" method="post" class="niceform" enctype="multipart/form-data">
+         
+                <fieldset>
+                    
+                    <dl>
+                        <dt><label for="nome">Nome:</label></dt>
+                        <dd><input type="text" name="nome" id="" size="54" value="<?php echo $row['nome']; ?>" /></dd>
+                    </dl><dl>
+                        <dt><label for="telefone">Telefone:</label></dt>
+                        <dd><input type="text" name="telefone" id="" size="54" /></dd>
+                    </dl>
+                    
+                    <dl>
+                        <dt><label for="comments">Mensagem:</label></dt>
+                        <dd><textarea name="comments" id="comments" rows="10" cols="55"></textarea></dd>
+                    </dl>
+                    
+                    
+                     <dl class="submit">
+                    <input type="submit" name="abrirchamado" id="submit" value="Enviar" />
+                     </dl>
+                     
+                     
+                    
+                </fieldset>
+                
+         </form>
+         </div>  
+        <?php
+            if (isset($_POST['abrirchamado'])&& isset($_SESSION['login'])) {
+                $id_cliente=$row['id'];
+                $nome=$_POST['nome'];
+                $telefone=$_POST['telefone'];
+                $descricao=$_POST['comments'];
+
+
+                $grava2=$conn->prepare('INSERT INTO mensagens (id, id_cliente, mensagem) VALUES (NULL, :pid, :pdescricao)');
+
+                $grava2->bindValue(':pid',$id_cliente);
+                $grava2->bindValue(':pdescricao',$descricao);
+                $grava2->execute();
+
+            
+
+            $para= "rahula@intrazone.com.br";
+                                    $assunto= "Contato via Painel";
+
+                                    $corpo = "<strong> Contato via painel </strong><br><br>";
+                                    $corpo .= "<strong> Nome: </strong> $nome";
+                                    $corpo .= "<br><strong> Telefone: </strong> $telefone";
+                                    $corpo .= "<br><strong> Email: </strong> ".$row['email']."";
+                                    $corpo .= "<br><strong> Mensagem: </strong> $descricao";
+        
+                                    $header= "Content-Type: text/html; charset= utf-8\n";
+                                    $header.="From: $email Reply-to: $email\n";
+        
+                                    mail($para,$assunto,$corpo,$header);
+                
+                echo "<meta http-equiv=\"refresh\" content=0;url=\"contato.php\">";
+                echo"<script type='text/javascript'>";
+
+                echo "alert('Contato realizado com sucesso. Aguarde retorno');";
+
+            echo "</script>";
+            }
+
+        ?>
 
     </div> <!--end of right content -->  
         

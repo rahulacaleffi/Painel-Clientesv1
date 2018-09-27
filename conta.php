@@ -147,9 +147,11 @@ ddaccordion.init({
                     ?>
                     </ul>
                 </div>
-                    
+                    <a href="https://www.intrazone.com.br/webmail"><img src="images/webmail.png" style="max-width: 100px;"></a> 
             </div>
             
+            <br>
+            <br>
             
             <div class="sidebar_box">
                 <div class="sidebar_box_top"></div>
@@ -183,8 +185,115 @@ ddaccordion.init({
     
     <div class="right_content">            
         
-    <h2>Serviços contratados</h2> 
+    <h2>Meus dados</h2> 
 
+    <div class="form">
+         <form action="conta.php" method="post" class="niceform" enctype="multipart/form-data">
+         
+                <fieldset>
+                    
+                    <dl>
+                        <dt><label for="nome">Nome:</label></dt>
+                        <dd><input type="text" name="nome" id="" required="required" size="54" value="<?php echo $row['nome']; ?>"/></dd>
+                    </dl>
+
+                    <dl>
+                        <dt><label for="email">E-mail:</label></dt>
+                        <dd><input type="text" name="email" id="" size="54" required="required" value="<?php echo $row['email']; ?>" /></dd>
+                    </dl>
+
+                    <dl>
+                        <dt><label for="telefone">Telefone:</label></dt>
+                        <dd><input type="text" name="telefone" id="" size="54" value="<?php echo $row['telefone']; ?>" /></dd>
+                    </dl>
+
+                    <dl>
+                        <dt><label for="razao">Razão Social:</label></dt>
+                        <dd><input type="text" name="razao" id="" size="54" value="<?php echo $row['razao']; ?>" /></dd>
+                    </dl>
+
+                    <dl>
+                        <dt><label for="cpf_cnpj">CPF/CNPJ:</label></dt>
+                        <dd><input type="text" name="cpf_cnpj" id="" size="54" value="<?php echo $row['cpf_cnpj']; ?>" /></dd>
+                    </dl>
+
+                    <dl>
+                        <dt><label for="cep">CEP:</label></dt>
+                        <dd><input type="text" name="cep" id="" size="54" value="<?php echo $row['cep']; ?>" /></dd>
+                    </dl>
+
+                    <dl>
+                        <dt><label for="endereco">Endereço:</label></dt>
+                        <dd><input type="text" name="endereco" id="" size="54" value="<?php echo $row['endereco']; ?>" /></dd>
+                    </dl>
+
+
+                    <dl>
+                        <dt><label for="senha1">Nova senha: (opcional)</label></dt>
+                        <dd><input type="password" name="senha1" id="" size="54" value="sasfasf" /></dd>
+                    </dl>
+                    <dl>
+                        <dt><label for="senha2">Confirmar senha:</label></dt>
+                        <dd><input type="password" name="senha2" id="" size="54" /></dd>
+                    </dl>
+
+                     <dl class="submit">
+                    <input type="submit" name="abrirchamado" id="submit" value="Salvar dados" />
+                     </dl>
+                     
+                     
+                    
+                </fieldset>
+                
+         </form>
+         </div>
+
+         <?php
+            if (isset($_POST['abrirchamado'])&&isset($_SESSION['login'])) {
+                $nome=$_POST['nome'];
+                $email=$_POST['email'];
+                $telefone=$_POST['telefone'];
+                $razao=$_POST['razao'];
+                $cep=$_POST['cep'];
+                $cpf_cnpj=$_POST['cpf_cnpj'];
+                $endereco=$_POST['endereco'];
+                if (!empty($_POST['senha2'])) {
+                    $senha1=$_POST['senha1'];
+                    $senha2=$_POST['senha2'];
+                }
+                if (strcasecmp($senha1, $senha2)==0) {
+                    $grava=$conn->prepare('UPDATE clientes SET nome=:pnome, email=:pemail, telefone=:ptelefone, endereco=:pendereco, razao=:prazao, cpf_cnpj=:pcpfcnpj, cep=:pcep, senha=:psenha WHERE id=:pid');
+                    $grava->bindValue(':pid',$_SESSION['login']);
+                    $grava->bindValue(':pnome',$nome);
+                    $grava->bindValue(':pemail',$email);
+                    $grava->bindValue(':ptelefone',$telefone);
+                    $grava->bindValue(':ptelefone',$telefone);
+                    $grava->bindValue(':prazao',$razao);
+                    $grava->bindValue(':prazao',$razao);
+                    $grava->bindValue(':pcep',$cep);
+                    $grava->bindValue(':pcep',$cep);
+                    $grava->bindValue(':pcpfcnpj',$cpf_cnpj);
+                    $grava->bindValue(':pendereco',$endereco);
+                    $grava->bindValue(':pendereco',$endereco);
+                    $grava->bindValue(':psenha',sha1($senha2));
+                    $grava->execute();
+                    echo "<meta http-equiv=\"refresh\" content=0;url=\"conta.php\">";
+                echo"<script type='text/javascript'>";
+
+                echo "alert('Dados alterados com sucesso');";
+
+            echo "</script>";
+                }else{
+                    echo "<meta http-equiv=\"refresh\" content=0;url=\"conta.php\">";
+                echo"<script type='text/javascript'>";
+
+                echo "alert('As senhas não coincidem');";
+
+            echo "</script>";
+                }
+
+            }
+         ?>
     </div> <!--end of right content -->  
         
                     
