@@ -510,10 +510,7 @@ margin-left: 30px;
         $row=$ver_login->fetch();
         ob_start();
         session_start();
-        
         $_SESSION['login']=$row['id'];
-
-
         echo "<meta http-equiv=\"refresh\" content=0;url=\"painel.php\">";
          
       }else{

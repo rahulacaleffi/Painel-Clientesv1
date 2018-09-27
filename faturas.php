@@ -81,7 +81,7 @@ ddaccordion.init({
     
                     <div class="menu">
                     <ul>
-                    <li><a class="current" href="painel.php">Início</a></li>
+                    <li><a href="painel.php">Início</a></li>
                     <li><a href="servicos.php">Serviços<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
@@ -92,7 +92,7 @@ ddaccordion.init({
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
                     
-                    <li><a href="faturas.php">Faturas<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a class="current" href="faturas.php">Faturas<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->

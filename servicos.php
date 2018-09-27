@@ -81,8 +81,8 @@ ddaccordion.init({
     
                     <div class="menu">
                     <ul>
-                    <li><a class="current" href="painel.php">Início</a></li>
-                    <li><a href="servicos.php">Serviços<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a href="painel.php">Início</a></li>
+                    <li><a class="current" href="servicos.php">Serviços<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <ul>
                         <li><a href="" title="">Consultar serviços</a></li>
